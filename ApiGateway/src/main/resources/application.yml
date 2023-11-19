@@ -1,0 +1,27 @@
+server:
+  port: 8000
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8888/eureka
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      #      default-filters:
+      #        - name : GlobalFilter
+      #          args:
+      #            baseMessage : Spring Cloud Gateway GlobalFilter
+      #            preLogger: true
+      #            postLogger: true
+      routes:
+#        - id : auth-service
+#          uri : lb://SERVICE1
+#          predicates:
+#            - Path=/first-service/**
+        #          filters:
+        #            - RewritePath=/first-service/(?<segment>.*), /$\{segment}
