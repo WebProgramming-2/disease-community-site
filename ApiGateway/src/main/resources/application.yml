@@ -19,9 +19,9 @@ spring:
       #            preLogger: true
       #            postLogger: true
       routes:
-#        - id : auth-service
-#          uri : lb://SERVICE1
-#          predicates:
-#            - Path=/first-service/**
-        #          filters:
-        #            - RewritePath=/first-service/(?<segment>.*), /$\{segment}
+        - id : auth-service
+          uri : lb://AUTH-SERVICE
+          predicates:
+            - Path=/auth-service/**
+          filters:
+          - RewritePath=/auth-service/(?<segment>.*), /$\{segment}
