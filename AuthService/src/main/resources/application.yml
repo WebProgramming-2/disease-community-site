@@ -1,3 +1,4 @@
+--- #DB
 spring:
   application:
     name: auth-service
@@ -15,6 +16,8 @@ spring:
         format_sql: true
 --- #Cloud
 server:
+#  servlet:
+#    context-path: /api
   port: 0
 eureka:
   client:
@@ -25,3 +28,20 @@ eureka:
   instance:
     instance-id:
       ${spring.application.name}:${spring.application.instance_id:${random.value}}
+--- #mail
+spring:
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${MAIL_USERNAME}
+    password: ${MAIL_PASSWORD}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+          connection-timeout: 5000
+          timeout: 5000
+          write timeout: 5000
