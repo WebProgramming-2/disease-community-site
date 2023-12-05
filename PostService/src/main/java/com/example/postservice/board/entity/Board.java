@@ -2,12 +2,11 @@ package com.example.postservice.board.entity;
 
 import com.example.postservice.board.dto.BoardDTO;
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Getter;
+import lombok.*;
 
 @Entity
 @Getter
-@Builder
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "board")
 public class Board extends BaseEntity {
     @Id
@@ -27,15 +26,26 @@ public class Board extends BaseEntity {
     private String boardContents;
 
     @Column
-    private int boardHits;
+    private Integer boardHits;
+
+    @Builder
+    public Board(Long id, String boardWriter, String boardPass, String boardTitle, String boardContents, int boardHits) {
+        this.id = id;
+        this.boardWriter = boardWriter;
+        this.boardPass = boardPass;
+        this.boardTitle = boardTitle;
+        this.boardContents = boardContents;
+        this.boardHits = boardHits;
+    }
 
     public static Board toEntity(BoardDTO boardDTO) {
         return Board.builder()
+                .id(boardDTO.getId())
                 .boardWriter(boardDTO.getBoardWriter())
                 .boardPass(boardDTO.getBoardPass())
                 .boardTitle(boardDTO.getBoardTitle())
                 .boardContents(boardDTO.getBoardContents())
-                .boardHits(boardDTO.getBoardHits())
+                .boardHits((boardDTO.getBoardHits() != null) ? boardDTO.getBoardHits() : 0)
                 .build();
     }
 }
