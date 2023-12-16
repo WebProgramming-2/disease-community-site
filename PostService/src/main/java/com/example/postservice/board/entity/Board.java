@@ -4,6 +4,9 @@ import com.example.postservice.board.dto.BoardDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -17,9 +20,6 @@ public class Board extends BaseEntity {
     private String boardWriter;
 
     @Column
-    private String boardPass;
-
-    @Column
     private String boardTitle;
 
     @Column(length = 500)
@@ -28,11 +28,23 @@ public class Board extends BaseEntity {
     @Column
     private Integer boardHits;
 
+    @Column
+    private Integer fileAttached;
+
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
+
+    @OneToMany(mappedBy = "board", cascade = CascadeType.REMOVE, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<BoardFile> boardFileEntityList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "board", cascade = CascadeType.REMOVE, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<Comment> commentEntityList = new ArrayList<>();
+
     @Builder
-    public Board(Long id, String boardWriter, String boardPass, String boardTitle, String boardContents, int boardHits) {
+    public Board(Long id, String boardWriter, String boardTitle, String boardContents, int boardHits) {
         this.id = id;
         this.boardWriter = boardWriter;
-        this.boardPass = boardPass;
         this.boardTitle = boardTitle;
         this.boardContents = boardContents;
         this.boardHits = boardHits;
@@ -42,7 +54,6 @@ public class Board extends BaseEntity {
         return Board.builder()
                 .id(boardDTO.getId())
                 .boardWriter(boardDTO.getBoardWriter())
-                .boardPass(boardDTO.getBoardPass())
                 .boardTitle(boardDTO.getBoardTitle())
                 .boardContents(boardDTO.getBoardContents())
                 .boardHits((boardDTO.getBoardHits() != null) ? boardDTO.getBoardHits() : 0)

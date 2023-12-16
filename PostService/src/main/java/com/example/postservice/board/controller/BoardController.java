@@ -1,7 +1,9 @@
 package com.example.postservice.board.controller;
 
 import com.example.postservice.board.dto.BoardDTO;
+import com.example.postservice.board.dto.CommentDTO;
 import com.example.postservice.board.service.BoardService;
+import com.example.postservice.board.service.CommentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,7 +18,9 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/board")
 public class BoardController {
+
     private final BoardService boardService;
+    private final CommentService commentService;
 
     @GetMapping("/save")
     public String saveForm() {
@@ -40,6 +44,8 @@ public class BoardController {
     public String findById(@PathVariable Long id, Model model,  @PageableDefault(page = 0) Pageable pageable) {
         boardService.updateHits(id);
         BoardDTO boardDTO = boardService.findById(id);
+        List<CommentDTO> commentDTOList = commentService.findAll(id);
+        model.addAttribute("commentList", commentDTOList);
         model.addAttribute("board", boardDTO);
         model.addAttribute("page", pageable.getPageNumber());
         return "detail";
