@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" xmlns :th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>myPage</title>
+    <style>
+        nav {
+            margin: auto;
+            height: 50px;
+            background-color: white;
+            border-bottom: 3px solid black;
+        }
+        nav ul {
+            list-style: none;
+        }
+        nav ul b li{
+            float: left;
+            margin-right: 100px;
+            margin-top: 10px;
+        }
+        .main-content {
+            margin: auto;
+            height: 300px;
+            background-color: darkseagreen;
+        }
+        .profile-image {
+            background-color: lightcyan;
+            position: relative;
+            background-position: center;
+            background-size: contain;
+            background-repeat: no-repeat;
+            margin-left: 50px;
+            top: 50px;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+        }
+        .profile-info {
+            background-color: lightcyan;
+            position: relative;
+            top: -150px;
+            left: 300px;
+            width: 700px;
+            height: 200px;
+        }
+
+        .profile-info div {
+            margin-bottom: 10px;
+        }
+
+        .profile-actions {
+            position: relative;
+            left: 875px;
+            top: -175px;
+        }
+
+        .article {
+            margin: auto;
+            width: 1000px;
+            height: 150px;
+            background-color: darkseagreen;
+            opacity: 50%;
+            margin-bottom: 10px;
+        }
+        a{
+            text-decoration: none;
+            color: olivedrab;
+        }
+    </style>
+</head>
+<body>
+<!--    <h1>index page</h1>-->
+<nav>
+    <ul>
+        <b>
+            <li><a th:href = "@{'/listImages'}">홈</a></li>
+            <li><a th:href = "@{'/listImages'}">마이페이지</a></li>
+            <li><a th:href = "@{'/listImages'}">게시판</a></li>
+            <li><a th:href = "@{'/listImages'}">게시판2</a></li>
+        </b>
+    </ul>
+</nav>
+
+<div class="main-content">
+    <div class="profile-image">
+        <img th:if="${not #strings.isEmpty(profileImage)}" th:src="${profileImage}" alt="프로필 이미지">
+        <img th:unless="${not #strings.isEmpty(profileImage)}" src="./익명.jpg" alt="기본 이미지">
+    </div>
+    <div class="profile-info">
+        <div>Login_ID:</div>
+        <div>nickname:</div>
+    </div>
+    <div class="profile-actions">
+        <button>회원정보 수정하기</button>
+    </div>
+
+</div>
+<div>
+    <div class="article">
+        <h1>글1</h1>
+    </div>
+    <div class="article">
+        <h1>글2</h1>
+    </div>
+    <div class="article">
+        <h1>글3</h1>
+    </div>
+</div>
+
+</body>
+</html>
