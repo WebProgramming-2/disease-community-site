@@ -5,6 +5,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -21,4 +22,18 @@ public class MemberProfile {
     private String profileImage;
 
     private String introduction;
+
+    public void update(String nickname, String profileImage, String introduction){
+        this.nickname = nickname;
+        this.profileImage = profileImage;
+        this.introduction = introduction;
+    }
+
+    @Builder
+    public MemberProfile(String nickname, String profileImage, String introduction) {
+        this.nickname = nickname;
+        this.profileImage = profileImage;
+        this.introduction = introduction;
+    }
+
 }

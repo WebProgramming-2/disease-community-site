@@ -4,6 +4,13 @@
     <meta charset="UTF-8">
     <title>myPage</title>
     <style>
+        h1{
+            text-align: center;
+            margin-top: 50px;
+            margin-bottom: 50px;
+            color: darkcyan;
+        }
+
         nav {
             margin: auto;
             height: 50px;
@@ -18,30 +25,19 @@
             margin-right: 100px;
             margin-top: 10px;
         }
-        .main-content {
-            margin: auto;
-            height: 300px;
+
+        .table{
+            font-size: 30px;
+            text-align: left;
+            margin:auto;
+            width: 500px;
+        }
+        .table tr th{
             background-color: darkseagreen;
+            border-bottom: 3px solid black;
         }
-        .profile-image {
-            background-color: lightcyan;
-            position: relative;
-            background-position: center;
-            background-size: contain;
-            background-repeat: no-repeat;
-            margin-left: 50px;
-            top: 50px;
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-        }
-        .profile-info {
-            background-color: lightcyan;
-            position: relative;
-            top: -150px;
-            left: 300px;
-            width: 700px;
-            height: 200px;
+        .table tr td{
+            font-size: 20px;
         }
 
         .profile-info div {
@@ -50,62 +46,74 @@
 
         .profile-actions {
             position: relative;
-            left: 875px;
-            top: -175px;
         }
 
-        .article {
-            margin: auto;
-            width: 1000px;
-            height: 150px;
-            background-color: darkseagreen;
-            opacity: 50%;
-            margin-bottom: 10px;
-        }
+
         a{
             text-decoration: none;
             color: olivedrab;
+        }
+        .addPostPageBtn {
+            position: relative;
+            border: none;
+            display: inline-block;
+            padding: 10px 18px;
+            border-radius: 15px;
+            font-family: "paybooc-Light", sans-serif;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.25s;
+            display: block;
+            margin-left:auto;
+            margin-right: auto;
+            margin-top:70px;
+        }
+
+        .w-btn-green {
+            background-color: black;
+            color: #d7fff1;
         }
     </style>
 </head>
 <body>
 <!--    <h1>index page</h1>-->
-<nav>
-    <ul>
-        <b>
-            <li><a th:href = "@{'/listImages'}">홈</a></li>
-            <li><a th:href = "@{'/listImages'}">마이페이지</a></li>
-            <li><a th:href = "@{'/listImages'}">게시판</a></li>
-            <li><a th:href = "@{'/listImages'}">게시판2</a></li>
-        </b>
-    </ul>
-</nav>
-
-<div class="main-content">
-    <div class="profile-image">
-        <img th:if="${not #strings.isEmpty(profileImage)}" th:src="${profileImage}" alt="프로필 이미지">
-        <img th:unless="${not #strings.isEmpty(profileImage)}" src="./익명.jpg" alt="기본 이미지">
-    </div>
-    <div class="profile-info">
-        <div>Login_ID:</div>
-        <div>nickname:</div>
-    </div>
-    <div class="profile-actions">
-        <button>회원정보 수정하기</button>
-    </div>
-
-</div>
 <div>
-    <div class="article">
-        <h1>글1</h1>
+    <nav>
+        <ul>
+            <b>
+                <li><a th:href = "@{'/hello'}">홈</a><li>
+                <li><a th:href = "@{'/hello'}">마이페이지</a></li>
+                <li><a th:href = "@{'/hello'}">게시판</a></li>
+                <li><a th:href = "@{'/hello'}">게시판2</a></li>
+            </b>
+        </ul>
+    </nav>
+    <h1>🏥나아지고 있어요🏥</h1>
+    <h1>마이페이지</h1>
+    <div >
+    <table class="table">
+            <tr><th>nickname</th></tr>
+            <tr><td><span th:text="${nickname}"></span></td></tr>
+            <tr><th>introduction</th></tr>
+            <tr><td><span th:text="${introduction}"></span></td></tr>
+    </table>
     </div>
-    <div class="article">
-        <h1>글2</h1>
-    </div>
-    <div class="article">
-        <h1>글3</h1>
-    </div>
+    <table>
+        <div class="profile-actions">
+            <button class="addPostPageBtn w-btn-green" onclick="createInfo()">개인정보 업로드</button>
+        </div>
+    </table>
+
+
 </div>
 
+
+<script>
+    //게시글 쓰기 페이지로 이동
+    const createInfo = () => {
+        location.href = "/mypage-service/uploadPage";
+    }
+</script>
 </body>
 </html>
