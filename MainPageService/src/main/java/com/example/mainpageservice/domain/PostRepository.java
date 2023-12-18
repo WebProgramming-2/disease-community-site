@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface PostRepository extends JpaRepository<Post, Long> {
-    @Query("SELECT new com.example.mainpageservice.dto.response.PostDTO(p.title, p.create_at, p.views, COUNT(l.id), u.nickname, c.name, COUNT(cmt.id)) " +
+    @Query("SELECT new com.example.mainpageservice.dto.response.PostDTO(p.id, p.title, p.create_at, p.views, COUNT(l.id), u.nickname, c.name, COUNT(cmt.id)) " +
             "FROM Post p " +
             "LEFT JOIN Like l ON p.id = l.post_id " +
             "LEFT JOIN User u ON p.user_id = u.id " +
@@ -20,7 +20,7 @@ public interface PostRepository extends JpaRepository<Post, Long> {
             "LIMIT 10")
     List<PostDTO> findPopularPosts();
 
-    @Query("SELECT new com.example.mainpageservice.dto.response.PostDTO(p.title, p.create_at, p.views, COUNT(l.id), u.nickname, c.name, COUNT(cmt.id)) " +
+    @Query("SELECT new com.example.mainpageservice.dto.response.PostDTO(p.id, p.title, p.create_at, p.views, COUNT(l.id), u.nickname, c.name, COUNT(cmt.id)) " +
             "FROM Post p " +
             "LEFT JOIN Like l ON p.id = l.post_id " +
             "LEFT JOIN User u ON p.user_id = u.id " +
@@ -31,7 +31,7 @@ public interface PostRepository extends JpaRepository<Post, Long> {
             "ORDER BY COUNT(l.id) DESC")
     Page<PostDTO> findByTitleContainingOrderByLikeCountDesc(String keyword, Pageable pageable);
 
-    @Query("SELECT new com.example.mainpageservice.dto.response.PostDTO(p.title, p.create_at, p.views, COUNT(l.id), u.nickname, c.name, COUNT(cmt.id)) " +
+    @Query("SELECT new com.example.mainpageservice.dto.response.PostDTO(p.id, p.title, p.create_at, p.views, COUNT(l.id), u.nickname, c.name, COUNT(cmt.id)) " +
             "FROM Post p " +
             "LEFT JOIN Like l ON p.id = l.post_id " +
             "LEFT JOIN User u ON p.user_id = u.id " +
@@ -42,7 +42,7 @@ public interface PostRepository extends JpaRepository<Post, Long> {
             "ORDER BY p.views DESC")
     Page<PostDTO> findByTitleContainingOrderByViewsDesc(String keyword, Pageable pageable);
 
-    @Query("SELECT new com.example.mainpageservice.dto.response.PostDTO(p.title, p.create_at, p.views, COUNT(l.id), u.nickname, c.name, COUNT(cmt.id)) " +
+    @Query("SELECT new com.example.mainpageservice.dto.response.PostDTO(p.id, p.title, p.create_at, p.views, COUNT(l.id), u.nickname, c.name, COUNT(cmt.id)) " +
             "FROM Post p " +
             "LEFT JOIN Like l ON p.id = l.post_id " +
             "LEFT JOIN User u ON p.user_id = u.id " +
@@ -53,7 +53,7 @@ public interface PostRepository extends JpaRepository<Post, Long> {
             "ORDER BY p.create_at DESC")
     Page<PostDTO> findByTitleContainingOrderByCreateAtDesc(String keyword, Pageable pageable);
 
-    @Query("SELECT new com.example.mainpageservice.dto.response.PostDTO(p.title, p.create_at, p.views, COUNT(l.id), u.nickname, c.name, COUNT(cmt.id)) " +
+    @Query("SELECT new com.example.mainpageservice.dto.response.PostDTO(p.id, p.title, p.create_at, p.views, COUNT(l.id), u.nickname, c.name, COUNT(cmt.id)) " +
             "FROM Post p " +
             "LEFT JOIN Like l ON p.id = l.post_id " +
             "LEFT JOIN User u ON p.user_id = u.id " +
@@ -64,7 +64,7 @@ public interface PostRepository extends JpaRepository<Post, Long> {
             "ORDER BY COUNT(l.id) DESC")
     Page<PostDTO> findByContentContainingOrderByLikeCountDesc(String keyword, Pageable pageable);
 
-    @Query("SELECT new com.example.mainpageservice.dto.response.PostDTO(p.title, p.create_at, p.views, COUNT(l.id), u.nickname, c.name, COUNT(cmt.id)) " +
+    @Query("SELECT new com.example.mainpageservice.dto.response.PostDTO(p.id, p.title, p.create_at, p.views, COUNT(l.id), u.nickname, c.name, COUNT(cmt.id)) " +
             "FROM Post p " +
             "LEFT JOIN Like l ON p.id = l.post_id " +
             "LEFT JOIN User u ON p.user_id = u.id " +
@@ -75,7 +75,7 @@ public interface PostRepository extends JpaRepository<Post, Long> {
             "ORDER BY p.views DESC")
     Page<PostDTO> findByContentContainingOrderByViewsDesc(String keyword, Pageable pageable);
 
-    @Query("SELECT new com.example.mainpageservice.dto.response.PostDTO(p.title, p.create_at, p.views, COUNT(l.id), u.nickname, c.name, COUNT(cmt.id)) " +
+    @Query("SELECT new com.example.mainpageservice.dto.response.PostDTO(p.id, p.title, p.create_at, p.views, COUNT(l.id), u.nickname, c.name, COUNT(cmt.id)) " +
             "FROM Post p " +
             "LEFT JOIN Like l ON p.id = l.post_id " +
             "LEFT JOIN User u ON p.user_id = u.id " +
@@ -86,7 +86,7 @@ public interface PostRepository extends JpaRepository<Post, Long> {
             "ORDER BY p.create_at DESC")
     Page<PostDTO> findByContentContainingOrderByCreateAtDesc(String keyword, Pageable pageable);
 
-    @Query("SELECT new com.example.mainpageservice.dto.response.PostDTO(p.title, p.create_at, p.views, COUNT(l.id), u.nickname, c.name, COUNT(cmt.id)) " +
+    @Query("SELECT new com.example.mainpageservice.dto.response.PostDTO(p.id, p.title, p.create_at, p.views, COUNT(l.id), u.nickname, c.name, COUNT(cmt.id)) " +
             "FROM Post p " +
             "LEFT JOIN Like l ON p.id = l.post_id " +
             "LEFT JOIN User u ON p.user_id = u.id " +
@@ -97,7 +97,7 @@ public interface PostRepository extends JpaRepository<Post, Long> {
             "ORDER BY COUNT(l.id) DESC")
     Page<PostDTO> findByNicknameContainingOrderByLikeCountDesc(String keyword, Pageable pageable);
 
-    @Query("SELECT new com.example.mainpageservice.dto.response.PostDTO(p.title, p.create_at, p.views, COUNT(l.id), u.nickname, c.name, COUNT(cmt.id)) " +
+    @Query("SELECT new com.example.mainpageservice.dto.response.PostDTO(p.id, p.title, p.create_at, p.views, COUNT(l.id), u.nickname, c.name, COUNT(cmt.id)) " +
             "FROM Post p " +
             "LEFT JOIN Like l ON p.id = l.post_id " +
             "LEFT JOIN User u ON p.user_id = u.id " +
@@ -108,7 +108,7 @@ public interface PostRepository extends JpaRepository<Post, Long> {
             "ORDER BY p.views DESC")
     Page<PostDTO> findByNicknameContainingOrderByViewsDesc(String keyword, Pageable pageable);
 
-    @Query("SELECT new com.example.mainpageservice.dto.response.PostDTO(p.title, p.create_at, p.views, COUNT(l.id), u.nickname, c.name, COUNT(cmt.id)) " +
+    @Query("SELECT new com.example.mainpageservice.dto.response.PostDTO(p.id, p.title, p.create_at, p.views, COUNT(l.id), u.nickname, c.name, COUNT(cmt.id)) " +
             "FROM Post p " +
             "LEFT JOIN Like l ON p.id = l.post_id " +
             "LEFT JOIN User u ON p.user_id = u.id " +
