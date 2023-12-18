@@ -4,6 +4,7 @@ import com.example.authservice.common.constant.ResponseStatus;
 import com.example.authservice.common.exception.custom.LogicException;
 import com.example.authservice.common.exception.custom.SendMessageException;
 import com.example.authservice.common.message.ResponseMessage;
+import org.apache.tomcat.websocket.AuthenticationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -52,5 +53,10 @@ public class GlobalException {
     return new ResponseEntity<>(
         ResponseMessage.of(ResponseStatus.BAD_REQUEST, errorMessage.toString()),
         HttpStatus.BAD_REQUEST);
+  }
+
+  @ExceptionHandler(AuthenticationException.class)
+  public ResponseEntity<ResponseMessage> authenticationException(){
+    return new ResponseEntity<>(ResponseMessage.of(ResponseStatus.CERTIFICATION_FAIL),HttpStatus.BAD_REQUEST);
   }
 }

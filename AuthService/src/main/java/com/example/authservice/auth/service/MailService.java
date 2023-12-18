@@ -13,6 +13,7 @@ import java.nio.file.Path;
 import java.util.Objects;
 import java.util.Random;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -21,6 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional
+@Slf4j
 @RequiredArgsConstructor
 public class MailService {
 
@@ -38,7 +40,7 @@ public class MailService {
       emailSender.send(mail);
       emailBoards.putEmailBoard(toEmail, authCode);
     } catch (Exception e) {
-      e.printStackTrace();
+      log.info("인증에 실패했습니다. 메시지 : {}", e.getMessage());
       throw new SendMessageException("인증번호 전송에 실패하였습니다.");
     }
   }
