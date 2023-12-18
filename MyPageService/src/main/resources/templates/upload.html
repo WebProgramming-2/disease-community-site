@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>게시글 추가/수정</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <style>
+        h1{
+            text-align: center;
+            margin-top: 100px;
+            color: darkcyan;
+        }
+        .nickname{
+            width: 400px;
+            height: 50px;
+            opacity: 50%;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            border-bottom: 3px solid black;
+            word-wrap: break-word;
+            word-break: break-all;
+            font-size: large;
+            text-align: center;
+        }
+        .introduction{
+            width: 400px;
+            height: 300px;
+            opacity: 50%;
+            border-bottom: 3px solid black;
+            font-size: large;
+            text-align: center;
+
+        }
+        .input{
+            margin-right: auto;
+            margin-left: auto;
+            margin-top: 150px;
+            font-size: 20px;
+        }
+        .input2{
+            margin-right: auto;
+            margin-left: auto;
+            margin-top: 50px;
+            font-size: 20px;
+        }
+
+        .w-btn {
+            position: relative;
+            border: none;
+            display: inline-block;
+            padding: 10px 18px;
+            border-radius: 15px;
+            font-family: "paybooc-Light", sans-serif;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.25s;
+            display: block;
+            margin:auto;
+        }
+
+        .w-btn-green {
+            background-color: black;
+            color: #d7fff1;
+        }
+    </style>
+</head>
+<body style="background-color: darkseagreen">
+<h1>🏥나아지고 있어요🏥</h1>
+    <form action="http://localhost:8080/mypage-service/upload-myPage" method="post" enctype="multipart/form-data">
+        <div >
+            <table class = "input">
+                <tr>
+                    <th class="name"><label for="nickname">nickname</label></th>
+                </tr>
+                <tr>
+                    <td><input class = "nickname" placeholder=" nickname을 입력해주세요!" id="nickname" name="nickname" type="text"></td>
+                </tr>
+            </table>
+            <table class="input2">
+                <tr>
+                    <th class="name"><label for="introduction">introduction</label></th>
+                </tr>
+                <tr>
+                    <td><input class = "introduction" placeholder="소개글을 입력해주세요!" id="introduction" name="introduction" type="text"></td>
+                </tr>
+            </table>
+
+        </div>
+        <br>
+        <div>
+            <button class="w-btn w-btn-green" type="submit">제출하기</button>
+        </div>
+
+    </form>
+</body>
+</html>

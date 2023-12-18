@@ -17,14 +17,11 @@ spring:
   thymeleaf:
     enabled: true
 
-#server:
-#  #  servlet:
-#  #    context-path: /api
-#  port: 0
 server:
   #  servlet:
   #    context-path: /api
   port: 0
+
 eureka:
   client:
     service-url:

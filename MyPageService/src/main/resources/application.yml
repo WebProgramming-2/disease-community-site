@@ -1,0 +1,57 @@
+spring:
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 50MB
+  application:
+    name: mypage-service
+  datasource:
+    url: jdbc:mysql://localhost:3306/disease
+    username: sy
+    password: sy0310
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+        dialect: org.hibernate.dialect.MySQLDialect
+  thymeleaf:
+    prefix: classpath:/templates/
+    check-template-location: true
+    suffix: .html
+    mode: HTML
+    cache: false
+server:
+  #  servlet:
+  #    context-path: /api
+  port: 8080
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8888/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+  instance:
+    instance-id:
+      ${spring.application.name}:${spring.application.instance_id:${random.value}}
+cloud:
+  aws:
+    s3:
+      bucket: s3-web2-upload-image
+    credentials:
+      access-key: AKIAXWQX5ZNLWRU7LU5X
+      secret-key: 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
+    region:
+      static: ap-northeast-2
+      auto: false
+    stack:
+      auto: false
+logging:
+  level:
+    com:
+      amazonaws:
+        util:
+          EC2MetadataUtils: ERROR
