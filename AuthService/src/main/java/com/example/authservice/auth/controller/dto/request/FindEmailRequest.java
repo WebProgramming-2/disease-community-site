@@ -4,13 +4,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+@NoArgsConstructor
 @Getter
 @Setter
-@NoArgsConstructor
-public class LoginRequest {
+public class FindEmailRequest {
 
-  private String emailId;
-
-  private String password;
+  private Long phoneNumber;
 
 }

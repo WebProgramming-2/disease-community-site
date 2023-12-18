@@ -7,4 +7,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface MemberRepository extends JpaRepository<Member, Long> {
 
   Optional<Member> findByEmailId(String email);
+
+  Optional<Member> findByPhoneNumber(Long phoneNumber);
+
+  Optional<Member> findByRefreshToken(String refreshToken);
 }

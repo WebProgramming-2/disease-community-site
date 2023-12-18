@@ -3,6 +3,8 @@ package com.example.authservice.auth.controller.dto.request;
 import com.example.authservice.auth.constant.Role;
 import com.example.authservice.auth.domain.Member;
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import java.util.Date;
@@ -25,6 +27,10 @@ public class JoinRequest {
       message = "공백 없이 8자리 ~ 20자리 이내 최소 하나 이상의 숫자, 영문자, 특수 문자를 포함해야 합니다.")
   private String password;
 
+  @Max(12)
+  @Min(10)
+  private Long phoneNumber;
+
   @DateTimeFormat(pattern = "yyyy-MM-dd")
   @NotBlank(message = "필수 정보입니다.")
   private Date birthOfDate;
@@ -34,6 +40,8 @@ public class JoinRequest {
         .emailId(emailId)
         .password(encodedPassword)
         .birthOfDate(birthOfDate)
+        .role(role)
+        .phoneNumber(phoneNumber)
         .build();
   }
 
