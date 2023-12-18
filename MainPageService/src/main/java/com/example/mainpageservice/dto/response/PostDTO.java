@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PostDTO {
+    private long id;
     private String title;
     private LocalDateTime create_at;
     private long views;
