@@ -3,18 +3,27 @@ spring:
     name: post-service
   datasource:
     url: ${DB_URL}
-    driver-class-name: com.mysql.cj.jdbc.Driver
     username: ${DB_USERNAME}
     password: ${DB_PASSWORD}
-  thymeleaf:
-    cache: false
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
   jpa:
     hibernate:
       ddl-auto: update
+
     properties:
       hibernate:
-        show_sql: true
         format_sql: true
+        default_batch_fetch_size: 100
+
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
+
+logging.level:
+  org.hibernate.SQL: debug
+
 server:
   #  servlet:
   #    context-path: /api
@@ -26,5 +35,4 @@ eureka:
     register-with-eureka: true
     fetch-registry: true
   instance:
-    instance-id:
-      ${spring.application.name}:${spring.application.instance_id:${random.value}}
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
