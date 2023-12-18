@@ -1,0 +1,241 @@
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>나아지고 있어요</title>
+
+    <link rel="stylesheet" th:href="@{/lib/reset.css}">
+    <link rel="stylesheet" th:href="@{/css/sytle.css}">
+    <link rel="stylesheet" th:href="@{/css/section.css}">
+    <link rel="stylesheet" th:href="@{/css/layout.css}">
+    <link rel="stylesheet" th:href="@{/css/chat.css}">
+    <link rel="stylesheet" th:href="@{/css/header/basic.css}">
+    <link rel="stylesheet" th:href="@{/css/footer/basic.css}">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css">
+
+
+    <link rel="stylesheet" th:href="@{/css/board/commons.css}">
+    <link rel="stylesheet" th:href="@{/css/board/list.css}">
+    <link rel="stylesheet" th:href="@{/css/index/basic.css}">
+    <style>
+        :root {
+            --font-family: -apple-system, BlinkMacSystemFont, Helvetica Neue, Apple SD Gothic Neo, 맑은 고딕, Malgun Gothic, 돋움, dotum, Arial, sans-serif;
+        }
+
+        :root {
+            --body-font-color: inherit;
+            --body-background-color: #ffffff;
+            --body-background-color-50: #ffffff80;
+            --header-font-color: inherit;
+            --header-background-color: inherit;
+            --point-color: #ffffff;
+            --point-background-color: #1ca8af;
+            --point-background-color-10: #1ca8af1a;
+            --point-background-color-20: #1ca8af33;
+            --point-background-color-80: #1ca8afc8;
+            --point-background-color-90: #1ca8afe6;
+        }
+
+        article .userImage {
+            background-image: url('/assets/userImage.svg');
+        }
+    </style>
+</head>
+
+<body>
+<div id="loaderBackground" class="loaderBackground">
+    <div class="loader"></div>
+</div>
+<header>
+    <div id="toggleBtn">
+        <i class="fa-solid fa-bars"></i>
+    </div>
+    <div id="alarmBtn">
+    </div>
+    <section id="sub">
+        <ul>
+            <li><a href="/join">회원가입</a></li>
+            <li><a href="/login">로그인</a></li>
+        </ul>
+    </section>
+    <section id="main">
+        <div class="logo">
+            <a href="/">
+                <img src="./assets/title.png" alt="나아지고 있어요">
+            </a>
+        </div>
+    </section>
+    <section id="list">
+        <div class="searchAndWrite">
+            <div></div>
+            <div>
+                <form th:action="@{/posts(keyword=${param.keyword}, searchType=${param.searchType}, sortType='like', userDisplay=${param.userDisplay}, pageNum=1)}" method="get">
+                    <div class="search">
+                        <select name="searchType" th:value="${param.searchType}">
+                            <option value="title">제목</option>
+                            <option value="content">내용</option>
+                            <option value="nickname">글쓴이</option>
+                        </select>
+                        <input type="text" name="keyword" maxlength="50">
+                        <button type="submit">검색</button>
+                    </div>
+                </form>
+            </div>
+            <div class="write">
+            </div>
+        </div>
+    </section>
+    <div class="shortcuts">
+        <div class="boardShortcuts visited">
+            <span class="title">최근 검색어</span>
+            <div id="visited">
+            <span class="item" th:each="recentSearch : ${recentSearches}"><a
+                    th:href="@{/posts(keyword = ${recentSearch},searchType = ${param.searchType}, sortType=${param.sortType}, userDisplay=${param.userDisplay}, pageNum=1)}"
+                    th:text="${recentSearch}">최근 검색어</a></span>
+            </div>
+        </div>
+    </div>
+    <section id="nav">
+        <div class="navWrap">
+            <nav>
+                <ul>
+                    <li style="background-color: #0B4C5F;">
+                        <div class="menu">
+                            <a style="font-weight: bold; color: #F7FE2E;" href="/">인기게시물</a>
+                            <div class="dropdownBtn">
+                                <i class="fa-solid fa-caret-up"></i>
+                            </div>
+                        </div>
+                    </li>
+                    <li style="background-color: inherit;">
+                        <div class="menu">
+                            <a style="font-weight: bold; " href="/">게시판 목록</a>
+                            <div class="dropdownBtn">
+                                <i class="fa-solid fa-caret-up"></i>
+                            </div>
+                        </div>
+                        <ul class="active ">
+                            <li style="background-color: inherit;" th:each="category : ${categoryList}">
+                                <a style="font-weight: normal; " th:href="'/boards/' + ${category.getId()}" th:text="${category.getName()}">1</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <div class="menu report"><a href="/report">신고/건의</a></div>
+            </nav>
+        </div>
+        <div class="navBackground"></div>
+    </section>
+</header>
+<main style="height: auto !important;">
+    <article id="list">
+        <section id="title">
+            <h1>
+                <div>검색 결과</div>
+            </h1>
+        </section>
+        <section id="boardList" class="notice">
+            <a class="item" href="/life/357294">
+                <div class="info">
+                    <div class="titleContainer">
+                        <span class="category primaryNotice">필독</span>
+                        <span class="category">익명</span>
+                        <span class="title">
+                                <span class="text"><span class="pre">[공지]</span> 나아지고 있어요 사이트 오픈!!</span>
+                                <span class="commentCount">99</span>
+                            </span>
+                    </div>
+                    <div class="etc">
+                        <div class="nickName">관리자<i class="verified fa-solid fa-circle-check"></i></div>
+                        <div class="dot"></div>
+                        <div class="datetime">방금</div>
+                        <div class="dot"></div>
+                        <div class="viewCount"><i class="fa-regular fa-eye"></i>99</div>
+                        <div class="dot"></div>
+                        <div class="likeCount"><i class="fa-regular fa-thumbs-up"></i>99</div>
+                    </div>
+                </div>
+            </a>
+        </section>
+        <section id="boardList" class="">
+            <a class="item" th:href="'/post/' + ${post.getId()}" th:each="post : ${posts.getPosts()}">
+                <div class="info">
+                    <div class="titleContainer">
+                        <span class="category" th:text="${post.getCategory()}">카테고리</span>
+                        <span class="title">
+                                <span class="text" th:text="${post.getTitle()}">제목</span>
+                                <span class="commentCount" th:text="${post.getCommentCount()}">0</span>
+                            </span>
+                    </div>
+                    <div class="etc">
+                        <div class="nickName" th:text="${post.getNickname()}">닉네임</div>
+                        <div class="dot"></div>
+                        <div class="datetime" th:text="${post.create_at}">작성일</div>
+                        <div class="dot"></div>
+                        <div class="viewCount" th:utext="'<i class=\'fa-regular fa-eye\'></i>' + ${post.getViews()}">0
+                        </div>
+                        <div class="dot"></div>
+                        <div class="likeCount"
+                             th:utext="'<i class=\'fa-regular fa-thumbs-up\'></i>' + ${post.getLikeCount()}">0
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </section>
+        <section class="pagination">
+            <div class="sort">
+                <a th:class="${#strings.equals(param.sortType, 'like')} ? 'selected' : 'notSelected'"
+                   th:href="@{/posts(keyword=${param.keyword},searchType=${param.searchType}, sortType='like', userDisplay=${param.userDisplay}, pageNum=1)}">
+                    좋아요순
+                </a>
+            </div>
+            <div class="sort">
+                <a th:class="${#strings.equals(param.sortType, 'views')} ? 'selected' : 'notSelected'"
+                   th:href="@{/posts(keyword=${param.keyword},searchType=${param.searchType}, sortType='views', userDisplay=${param.userDisplay}, pageNum=1)}">
+                    조회수순
+                </a>
+            </div>
+            <div class="sort">
+                <a th:class="${#strings.equals(param.sortType, 'create_at')} ? 'selected' : 'notSelected'"
+                   th:href="@{/posts(keyword=${param.keyword},searchType=${param.searchType}, sortType='create_at', userDisplay=${param.userDisplay}, pageNum=1)}">
+                    작성일순
+                </a>
+            </div>
+        </section>
+        <section class="pagination">
+            <div th:if="${posts.totalPage} > 0" class="prev">
+                <a th:if="${posts.currentPageNumber > 1}"
+                   th:href="@{/posts(keyword = ${param.keyword},searchType = ${param.searchType}, sortType=${param.sortType}, userDisplay=${param.userDisplay}, pageNum=${posts.currentPageNumber-1})}">
+                    이전
+                </a>
+            </div>
+            <div class="number">
+                <a th:each="pageNumber : ${#numbers.sequence(1, posts.totalPage)}"
+                   th:class="${posts.currentPageNumber == pageNumber} ? 'selected' : 'notSelected'"
+                   th:text="${pageNumber}"
+                   th:href="@{/posts(keyword = ${param.keyword},searchType = ${param.searchType}, sortType=${param.sortType}, userDisplay=${param.userDisplay}, pageNum=${pageNumber})}"
+                >
+                </a>
+            </div>
+            <div th:if="${posts.totalPage} > 0" class="next">
+                <a th:if="${posts.currentPageNumber < posts.totalPage}"
+                   th:href="@{/posts(keyword = ${param.keyword},searchType = ${param.searchType}, sortType=${param.sortType}, userDisplay=${param.userDisplay}, pageNum=${posts.currentPageNumber+1})}">
+                    다음
+                </a>
+            </div>
+        </section>
+    </article>
+</main>
+<div class="navigationButtons">
+    <a rel="nofollow" href="javascript:window.scrollTo({top: 0, behavior: 'smooth'});" title="위로"><i
+            class="fa-solid fa-caret-up"></i></a>
+    <a rel="nofollow" href="javascript:window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'});"
+       title="아래로"><i class="fa-solid fa-caret-down"></i></a>
+</div>
+<footer>
+    <div class="wrap">
+        <div class="guide"></div>
+    </div>
+</footer>
+</body>
+
+</html>
