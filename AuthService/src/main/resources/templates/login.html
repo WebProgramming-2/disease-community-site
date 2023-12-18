@@ -1,0 +1,129 @@
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link  href="/css/login.css" rel="stylesheet">
+    <style>
+        .main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #4e5968;
+        }
+        .login {
+            display: flex;
+            flex-direction: column;
+            padding: 100px 0px;
+            width: 450px;
+        }
+        .img {
+            width: 30px;
+        }
+        .form {
+            /* width: 450px; */
+            display: flex;
+            flex-direction: column;
+        }
+        .email, .password {
+            width: 100%;
+            height: 48px;
+            font-size: 14px;
+            margin: 10px 0px;
+            padding: 0px 18px;
+            border: 2px solid rgba(0,27,55,0.1);
+            border-radius: 7px;
+            box-sizing: border-box;
+        }
+        .email:hover, .password:hover {
+            border: 2px solid #16a34a;
+        }
+        .sub{
+            display: flex;
+            align-items: center;
+            margin: 30px 0px;
+            justify-content: space-between;
+        }
+        a{
+            color: #4e5968;
+            text-decoration: none;
+        }
+        a:hover {
+            color: black;
+        }
+        button {
+            color: white;
+            background-color: #16a34a;
+            padding: 11px 16px;
+            font-size: 15px;
+            border: none;
+            border-radius: 7px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #84cc16;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <div class="main">
+        <div class="login">
+            <a>
+                <h2>나아지고 있어요
+                    <img src="Hostipal.png">
+                </h2>
+            </a>
+            <div>
+                <h2 style="margin: 50px 0px;">로그인</h2>
+            </div>
+            <form action="http://localhost:8000/auth-service/login" method="post" class="form">
+                <div>
+                    <label for="email">이메일 주소
+                        <input id="email" class="email" type="email">
+                    </label>
+                </div>
+                <div style="margin-top: 15px;">
+                    <label for="password">비밀번호
+                        <input id="password" class="password" type="password">
+                    </label>
+                </div>
+                <div class="sub">
+                   <span>
+                        <a th:href="@{/auth-service/find-email}">아이디 찾기</a>
+                        |
+                       <a th:href="@{/auth-service/find-password}">비밀번호 찾기</a>
+                        |
+                       <a th:href="@{/auth-service/join}">회원가입</a>
+                   </span>
+                   <button class="loginbutton" type="submit">로그인</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function login() {
+            let $email = document.querySelector("#email").value;
+            let $password = document.querySelector("#password").value;
+
+            axios.post('http://localhost:8000/auth-service/login', { emailId: $email, password : $password})
+            .then(function (response) {
+                // 응답 처리 로직 작성
+                console.log(response.data);
+                window.location.href = "/auth-service/home";
+            })
+            .catch(function (error) {
+                // 에러 처리 로직 작성
+                console.error(error);
+            });
+        }
+        document.querySelector('.loginbutton').addEventListener('click', function (event) {
+            // 폼 전송 동작 취소
+            event.preventDefault();
+            // 이메일을 API로 전송하는 함수 호출
+            login();
+        });
+    </script>
+</body>
+</html>
