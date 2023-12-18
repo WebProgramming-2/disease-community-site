@@ -9,7 +9,3 @@ eureka:
     fetch-registry: false
     service-url:
       defaultZone : http://localhost:${server.port}/eureka/
-  server:
-    renewal-percent-threshold: 0.85
-
-

@@ -1,6 +1,5 @@
 server:
   port: 8000
-
 eureka:
   client:
     register-with-eureka: true
@@ -17,8 +16,7 @@ spring:
       #          args:
       #            baseMessage : Spring Cloud Gateway GlobalFilter
       #            preLogger: true
-      #            postLogger: true
-      routes:
+       routes:
         - id : auth-service
           uri : lb://AUTH-SERVICE
           predicates:
@@ -27,5 +25,9 @@ spring:
           uri : lb://POST-SERVICE
           predicates:
             - Path=/post-service/**
+        - id: mainPage-service
+          uri: lb://MAINPAGE-SERVICE
+          predicates:
+            - Path=/mainPage-service/**
 #          filters:
-#          - RewritePath=/auth-service/(?<segment>.*), /$\{segment}
+#          - RewritePath=/mainPage-service/(?<segment>.*), /$\{segment}
